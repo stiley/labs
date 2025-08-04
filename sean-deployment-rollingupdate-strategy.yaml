@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: sean-deployment
+    mylabel: sean
+  name: sean-deployment
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: sean-deployment
+  template:
+    metadata:
+      labels:
+        app: sean-deployment
+    spec:
+      containers:
+        - image: httpd:alpine3.19
+          name: httpd
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:  
+      maxUnavailable: 1
+      maxSurge: 1
+
